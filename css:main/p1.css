@@ -1,0 +1,131 @@
+/* CSS Pseudocode
+-target sections/divs etc 
+-create some basic styling for sections so I can see my wireframe
+-get the placement somewhere near
+-add 4 classes for 4 obstacles, background image 
+-create frog class with bg image
+-create a dead frog class
+-create safe ledge (embankment) background color 
+-time out class
+-game over class 
+-add win class
+-add keys image
+
+Afterwards:
+Improve placement and styling
+improve media queries
+
+*/
+
+
+body {
+  background-color: #c2e3fe;
+  font-family: 'Fredoka', sans-serif;
+  color: #5a5a87;
+}
+
+header {
+  font-size: 4rem;
+  text-align: center;
+}
+main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: aliceblue; 
+  min-height: 80rem;
+  max-width: 100rem;
+}
+
+.left-container{
+background-color: navy;
+font-size: 2rem;
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+}
+
+#points-div{
+background-color: white;
+}
+
+#lives-div {
+background-color: white;
+}
+
+.game-grid{
+display: flex;
+flex-wrap: wrap;
+}
+
+.right-container {
+background-color: navy;
+font-size: 2rem;
+}
+
+.rules {
+background-color: white;
+}
+
+.timer {
+background-color: white;
+}
+
+button {
+  background-color:#5a5a87;
+  color: white;
+  padding: .5rem;
+  font-size: 3rem;
+  border-radius: 10px;
+  position: absolute;
+}
+
+footer {
+  min-height: 5rem;
+  text-align: center;
+}
+
+.bingo {
+background-color: yellow;
+}
+
+.obst2 {
+background-color: yellow;
+}
+
+.obst3 {
+background-color: yellow;
+}
+
+.obst4 {
+background-color: yellow;
+}
+
+.bluey {
+background-image: url(../images/bluey.jpeg);
+background-size: contain;
+}
+
+.crash {
+background-color: red;
+}
+
+.safety-cells {
+  background-color: lightgreen;
+}
+
+.time-out {
+background-color: red;
+}
+
+.game-over {
+background-color: rebeccapurple;
+}
+
+.player-wins {
+  background-color: aqua;
+}
+
+.winning-cells {
+  background-color: green;
+}
