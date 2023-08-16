@@ -7,7 +7,7 @@ const lives = document.querySelector('.lives')
 const points = document.querySelector('.points')
 const play = document.querySelector('button')
 const win = document.querySelector('player-wins')
-
+const crash = document.querySelector('.crash')
 
 
 
@@ -21,7 +21,7 @@ let livesRemaining = 3
 let currentPoints = 0 
 const resetPoints = 0
 const blueyStartPosition = 115
-const bingoStartPosition = [99, 102, 104, 108]
+const bingo = [99, 102, 104, 108]
 const winningCells = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 const safetyCells = [77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54]
 const obst2 = [75, 76]
@@ -51,12 +51,13 @@ function startGame() {
   playsound.src = 'sounds/do_it copy.wav'
   playsound.play()
   addBluey(blueyStartPosition)
-  addBingo(bingoStartPosition)
+  addBingo(bingo)
   addWinningCells(winningCells)
   addSafetyCells(safetyCells)
   addObst2Cells(obst2)
   addObbst3Cells(obst3)
   startTimer(interval)
+  // moveObstacles()
 }
 
 play.addEventListener('click', startGame)
@@ -67,12 +68,8 @@ function addBluey(position){
   cells[currentBlueyPosition].classList.add('bluey')
 }
 
-
-
-function addBingo(positions){
-  bingoStartPosition.forEach(function(position){
-    cells[position].classList.add('bingo') 
-  })
+function removeBluey() {
+  cells[currentBlueyPosition].classList.remove('bluey')
 }
 
 
@@ -92,6 +89,12 @@ function addSafetyCells(positions){
 }
 
 
+function addBingo(positions){
+  bingo.forEach(function(position){
+    cells[position].classList.add('bingo') 
+  })
+}
+
 
 function addObst2Cells(positions) {
   obst2.forEach(function(position){
@@ -107,11 +110,19 @@ function addObbst3Cells(positions) {
   })
 }
 
+// function moveObstacles(positions) {
+//   bingo = cells[Math.floor() --]
+//   }
+// }
 
+//   positions.forEach(function(position) {
+//     cells[position].classList.remove('bingo')
+//     cells[position + 1].classList.add('bingo')
+//     console.log(positions)
+//   })
+//   setInterval(moveObstacles(), 500)
+// }
 
-function removeBluey(event) {
-  cells[currentBlueyPosition].classList.remove('bluey')
-}
 
 
 
@@ -126,6 +137,12 @@ function moveBluey(event){
   if (key === up && currentBlueyPosition >= width){
     currentBlueyPosition -= width
     updatePoints()
+    if (winningCells.includes(currentBlueyPosition)) {
+      playerWins()
+    }
+    if (bingo.includes(currentBlueyPosition)) {
+      collision()
+    }
   } else if (key === down && cellCount - 1 >= currentBlueyPosition + width){
     currentBlueyPosition += width
   } else if (key === left && currentBlueyPosition % width !== 0){
@@ -150,12 +167,9 @@ function startTimer() {
       timer.innerHTML = timeRemaining
       if (timeRemaining === 0){
         clearInterval(interval)
-        removeLife()
         timesup()
-        console.log('time is up')
       }
     }, 1000)
-    console.log(timeRemaining)
   }
 }
 
@@ -180,22 +194,28 @@ function updatePoints() {
 
 function timesup() {
   if (timeRemaining === 0 && livesRemaining >= 1){
-    removeBluey()
+    removeBluey(currentBlueyPosition)
     cells[currentBlueyPosition].classList.add('time-out')
     playsound.src = 'sounds/biscuits.mpeg'
     playsound.play()
+    removeLife()
     resetGame()
   } else if (timeRemaining === 0 && livesRemaining === 0)
     lose() 
 }
 
-
-function lose() {
-  removeBluey()
-  clearInterval(interval)
-  playsound.src = 
-  playsound.play()
-  cells[messageCell].classList.add('game-over') 
+function collision() {
+  if (bingo.includes(currentBlueyPosition)) {
+    console.log('bingo collision')
+    cells[currentBlueyPosition].classList.remove('bluey')
+    cells[currentBlueyPosition].classList.add('crash')
+    playsound.src = 'sounds/biscuits.mpeg'
+    playsound.play()
+    removeLife()
+    resetGame()
+  } else if (livesRemaining === 0) {
+    lose() 
+  }
 }
 
 
@@ -203,31 +223,75 @@ function resetGame() {
   clearInterval(interval)
   timeRemaining = startingTime
   startTimer()
-
   setTimeout(function() {
-    cells[currentBlueyPosition].classList.remove('time-out')
+    cells[currentBlueyPosition].classList.remove('time-out') 
+    cells[currentBlueyPosition].classList.remove('crash')
     currentBlueyPosition = blueyStartPosition
     addBluey(blueyStartPosition)
     playsound.src = 'sounds/do_it copy.wav' 
     playsound.play()
-    points.innerHTML = resetPoints
+    currentPoints = 0
+    points.innerHTML = currentPoints
     startTimer()
-  }, 5000)
+  }, 3000)
 }
+
+
+function lose() {
+  clearInterval(interval)
+  clearTimeout
+  playsound.src = 'sounds/biscuits.mpeg'
+  playsound.play()
+  cells[messageCell].classList.add('game-over') 
+  endGame()
+}
+
 
 function playerWins() {
   if (winningCells.includes(currentBlueyPosition)) { 
+    console.log('player wins')
     playsound.src = 'sounds/bingo.mpeg'
-    removeBluey()
+    playsound.play()
     clearInterval(interval)
-    points.innerHTML = (currentPoints * 2)
-    startTimer()
+    currentPoints *= 2
+    points.innerHTML = currentPoints
     cells[messageCell].classList.add('player-wins')
-    console.log()
+    endGame()
   }
 }
 
+  
 
+
+function endGame() {
+  cells[currentBlueyPosition].classList.remove('bluey')
+  
+  bingo.forEach(function(position) {
+    cells[position].classList.remove('bingo')
+  })
+  
+  winningCells.forEach(function(position) {
+    cells[position].classList.remove('winning-cells')
+  })
+  
+  safetyCells.forEach(function(position) {
+    cells[position].classList.remove('safety-cells')
+  })
+  
+  obst2.forEach(function(position) {
+    cells[position].classList.remove('obst2')
+  })
+  
+  obst3.forEach(function(position) {
+    cells[position].classList.remove('obst3');
+  })
+}
+
+
+//when you win the game continues
+// MAKE OBST MOVE
+// colision function
+// too many lives
 //add new game starts in 4, 3, 2, 1
 //update sounds and images
 //stop the timer restarting at 0
@@ -235,4 +299,6 @@ function playerWins() {
 // make sure 'lives remaining text doesnt disapear
 // make play button so it resets the game if pressed
 //disable keys until game restarts
-
+//make it so that the timer is the same background as the div its in
+//remove cell numbers
+//make it so that the JS doesnt number the obstacle 
