@@ -47,10 +47,12 @@ justify-content: flex-end;
 
 #points-div{
 background-color: white;
+padding: 2rem;
 }
 
 #lives-div {
 background-color: white;
+padding: 2rem;
 }
 
 .game-grid{
@@ -63,13 +65,16 @@ background-color: navy;
 font-size: 2rem;
 }
 
-.rules {
+.rules, li {
+background-color: white;
+padding: 1rem;
+}
+
+.timer, .timer-div {
 background-color: white;
 }
 
-.timer {
-background-color: white;
-}
+
 
 button {
   background-color:#5a5a87;

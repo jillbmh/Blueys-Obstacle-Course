@@ -1,3 +1,4 @@
+
 const grid = document.querySelector('.game-grid')
 const playsound = document.getElementById('playsound')
 const outOfTime = document.querySelector('time-out')
@@ -10,13 +11,12 @@ const win = document.querySelector('player-wins')
 const crash = document.querySelector('.crash')
 
 
-
 const width = 11
 const cellCount = width * width
-const cells = []
-const startingTime = 5
-let timeRemaining = 5
+const startingTime = 6
+let timeRemaining = 6
 let interval = null
+const cells = []
 let livesRemaining = 3
 let currentPoints = 0 
 const resetPoints = 0
@@ -28,7 +28,6 @@ const obst2 = [75, 76]
 const obst3 = [55, 56]
 const messageCell = [60]
 let currentBlueyPosition = 115
-
 
 
 function generateGrid(){
@@ -57,7 +56,7 @@ function startGame() {
   addObst2Cells(obst2)
   addObbst3Cells(obst3)
   startTimer(interval)
-  // moveObstacles()
+  // moveBingo()
 }
 
 play.addEventListener('click', startGame)
@@ -110,21 +109,22 @@ function addObbst3Cells(positions) {
   })
 }
 
-// function moveObstacles(positions) {
-//   bingo = cells[Math.floor() --]
-//   }
-// }
 
-//   positions.forEach(function(position) {
-//     cells[position].classList.remove('bingo')
-//     cells[position + 1].classList.add('bingo')
-//     console.log(positions)
+// let bingoMoved
+
+// function moveBingo() {
+//   bingo.forEach(function(position){
+//     cells[position].classList.remove('bingo') 
+//     bingoMoved = position - 1
+//     if (bingoMoved <= 99) {
+//       bingoMoved = 109
+//     }
+//     cells[bingoMoved].classList.add('bingo') 
+//     bingo[position] = bingoMoved
 //   })
-//   setInterval(moveObstacles(), 500)
+//   const moveBingoInterval = setInterval(moveBingo, 1000)
 // }
-
-
-
+      
 
 
 function moveBluey(event){
@@ -138,10 +138,10 @@ function moveBluey(event){
     currentBlueyPosition -= width
     updatePoints()
     if (winningCells.includes(currentBlueyPosition)) {
-      playerWins()
+      return playerWins()
     }
     if (bingo.includes(currentBlueyPosition)) {
-      collision()
+      return collision()
     }
   } else if (key === down && cellCount - 1 >= currentBlueyPosition + width){
     currentBlueyPosition += width
@@ -154,7 +154,6 @@ function moveBluey(event){
 }
 
 document.addEventListener('keydown', moveBluey)
-
 
 
 function startTimer() {
@@ -172,7 +171,6 @@ function startTimer() {
     }, 1000)
   }
 }
-
 
 
 function removeLife() {
@@ -193,27 +191,27 @@ function updatePoints() {
 
 
 function timesup() {
-  if (timeRemaining === 0 && livesRemaining >= 1){
+  if (timeRemaining === 0 && livesRemaining >= 2){
     removeBluey(currentBlueyPosition)
     cells[currentBlueyPosition].classList.add('time-out')
     playsound.src = 'sounds/biscuits.mpeg'
     playsound.play()
     removeLife()
     resetGame()
-  } else if (timeRemaining === 0 && livesRemaining === 0)
+  } else if (timeRemaining === 0 && livesRemaining === 1)
     lose() 
 }
 
 function collision() {
-  if (bingo.includes(currentBlueyPosition)) {
+  if (bingo.includes(currentBlueyPosition) && livesRemaining >= 2) {
     console.log('bingo collision')
-    cells[currentBlueyPosition].classList.remove('bluey')
+    removeBluey(currentBlueyPosition) 
     cells[currentBlueyPosition].classList.add('crash')
     playsound.src = 'sounds/biscuits.mpeg'
     playsound.play()
     removeLife()
     resetGame()
-  } else if (livesRemaining === 0) {
+  } else if (bingo.includes(currentBlueyPosition) && livesRemaining === 1) {
     lose() 
   }
 }
@@ -238,8 +236,11 @@ function resetGame() {
 
 
 function lose() {
+  removeLife()
   clearInterval(interval)
   clearTimeout
+  timer.innerHTML = 0
+  points.innerHTML = 0
   playsound.src = 'sounds/biscuits.mpeg'
   playsound.play()
   cells[messageCell].classList.add('game-over') 
@@ -264,7 +265,7 @@ function playerWins() {
 
 
 function endGame() {
-  cells[currentBlueyPosition].classList.remove('bluey')
+  cells[currentBlueyPosition].classList.remove('bluey') 
   
   bingo.forEach(function(position) {
     cells[position].classList.remove('bingo')
@@ -283,18 +284,16 @@ function endGame() {
   })
   
   obst3.forEach(function(position) {
-    cells[position].classList.remove('obst3');
+    cells[position].classList.remove('obst3')
   })
 }
 
 
 //when you win the game continues
 // MAKE OBST MOVE
-// colision function
-// too many lives
 //add new game starts in 4, 3, 2, 1
 //update sounds and images
-//stop the timer restarting at 0
+//stop the timer restarting at 0 --> add a second on to timer
 //stop getting points if you go down and back up
 // make sure 'lives remaining text doesnt disapear
 // make play button so it resets the game if pressed
