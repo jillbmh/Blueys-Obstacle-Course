@@ -1,0 +1,208 @@
+/* CSS Pseudocode
+-target sections/divs etc 
+-create some basic styling for sections so I can see my wireframe
+-get the placement somewhere near
+-add 4 classes for 4 obstacles, background image 
+-create frog class with bg image
+-create a dead frog class
+-create safe ledge (embankment) background color 
+-time out class
+-game over class 
+-add win class
+-add keys image
+
+Afterwards:
+Improve placement and styling
+improve media queries
+
+*/
+
+
+body {
+  background-color: #88d6fe; 
+  font-family: 'Fredoka', sans-serif;
+  color: #5a5a87; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url(../images/BlueyBackground.jpeg);
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-size: 35rem;
+}
+
+
+header {
+  min-height: 75px;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* background-color: #c2e3fe; */
+  min-height: 80rem;
+  max-width: 100rem;
+}
+
+.left-container{
+/* background-color:#c2e3fe; */
+font-size: 2rem;
+display: flex;
+flex-direction: column;
+justify-content: center;
+padding: 2rem;
+text-align: center;
+}
+
+#points-div{
+/* background-color: white; */
+padding: 2rem;
+margin-top: 20rem;
+}
+
+#lives-div {
+/* background-color: white; */
+padding: 2rem;
+}
+
+.game-grid{
+display: flex;
+flex-wrap: wrap;
+max-height: 75rem;
+}
+
+.right-container {
+/* background-color: #c2e3fe; */
+font-size: 2rem;
+padding: 2rem;
+text-align: center;
+}
+
+.rules, li {
+background-color: aliceblue;
+padding: 1rem;
+border-radius: 25px;
+}
+
+.rules {
+  text-decoration: underline;
+}
+
+.timer, .timer-div {
+/* background-color: white; */
+}
+
+
+
+button {
+  background-color:#5a5a87;
+  color: white;
+  padding: .5rem;
+  margin-top: 3rem;
+  margin-left: 2rem;
+  font-size: 3rem;
+  border-radius: 10px;
+  position: absolute;
+}
+
+footer {
+  min-height: 5rem;
+  text-align: center;
+  padding-top: 2rem;
+  font-size: 1.5rem;
+}
+
+.bingo {
+background-image: url("../images/bingo2.gif");
+background-size: contain;
+background-repeat: no-repeat;
+background-position: center;
+}
+
+.bingo2 {
+  background-image: url('../images/bingo23.gif');
+  background-size: contain;
+background-repeat: no-repeat;
+background-position: center;
+}
+
+.obst2 {
+background-image: url("../images/obst2.gif"); 
+background-size: contain;
+background-repeat: no-repeat;
+background-position: center;
+}
+
+.obst3 {
+  background-image: url("../images/obst2.gif"); 
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  }
+
+
+.obst4 {
+  background-image: url("../images/obst4.gif"); 
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.obst5 {
+  background-image: url("../images/obst5.gif"); 
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.obst6 {
+  background-image: url("../images/obst6.gif"); 
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.bluey {
+background-image: url("../images/bluey.gif");
+background-repeat: no-repeat;
+background-size: contain; 
+}
+
+.crash {
+background-color: red;
+border-radius: 30px;
+}
+
+.safety-cells {
+  background-color: #c2e3fe; 
+}
+
+.time-out {
+background-color: red;
+border-radius: 30px;
+}
+
+.game-over {
+background-image:url("../images/bingofloss.gif");
+background-size: contain;
+background-repeat: no-repeat;
+background-position: center;
+}
+
+.player-wins {
+  background-image: url('../images/blueywin.jpeg');
+  background-size: contain;
+  background-repeat:no-repeat;
+  background-position:center;
+}
+
+.winning-cells {
+  background-image: url('/images/safe.png');
+  background-size: contain;
+  background-repeat:no-repeat;
+  background-position:center;
+}
+
+/* 
+.test {
+background-image: 
+} */
