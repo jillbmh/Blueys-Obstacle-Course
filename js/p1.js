@@ -47,7 +47,9 @@ function generateGrid(){
     cell.classList.add('cell')
     cell.style.width = `${100 / width}%`
     cell.style.height = `${100 / width}%`
-    cell.innerHTML = i
+    cell.style.minHeight = '1rem'
+    cell.style.minWidth = '1rem'
+    // cell.innerHTML = [i]
     cell.dataset.index = i
     grid.append(cell)
     cells.push(cell)
