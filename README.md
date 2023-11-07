@@ -35,7 +35,7 @@ I planned the wire frame on figma and the pseudocode on Trello. I was able to us
 
 
 
-Build/Code Process
+# Build/Code Process
 
 I started off by creating the HTML, basic CSS and an empty grid using JavaScript. I made a function to start the game with sound and an image.
 
