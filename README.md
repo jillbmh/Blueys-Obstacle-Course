@@ -3,13 +3,13 @@
 
 ## Intro
 
-Our first project during the General Assemblys Software Engineering Immersive Course, was a solo project. We were tasked with building a grid based game and had 7 days to complete it.
+Our first project during the General Assembly's Software Engineering Immersive Course, was a solo project. We were tasked with building a grid based game and had 7 days to complete it.
 
 Blueys Obstacle course is a game of Frogger based on the children's tv show ‘Bluey’. Bluey is my youngest daughter's favourite TV show. There are different characters that Bluey must get past to get to the garden. This was my first project and first time building a game. 
 
 You can access the application and code here: https://github.com/jillbmh/Blueys-Obstacle-Course.git
 
-![Bluey-Game-Image](Blueys-Obstacle-Course/images/Bluey-Game.png)
+![Bluey-Game-Image](images/Bluey-Game.png)
 
 
 ## Overview of task
@@ -26,9 +26,9 @@ In addition to the above technologies I used Figma and Trello to plan the projec
 
 I planned the wire frame on figma and the pseudocode on Trello. I was able to use Trello to move around the order of each task quite easily which helped me as I planned the game. I wanted to make sure that I gave myself lots of time to write the JavaScript so planned to just use colours for the backgrounds to get me started.
 
-![Trello Board](Blueys-Obstacle-Course/images/p1-trell0.png)
+![Trello Board](images/p1-trell0.png)
 
-![Figma wireframe](Blueys-Obstacle-Course/images/p1-figma.png)
+![Figma wireframe](images/p1-figma.png)
 
 
 ## Build/Code Process
@@ -43,7 +43,7 @@ I then looked at the functionality for the lives, points and how to win. I kept 
 
 I found the functions for a collision quite tricky and did lots of research, I was really pleased to figure it out.
 
-![example code](Blueys-Obstacle-Course/images/p1-code-1.png)
+![example code](images/p1-code-1.png)
 
 I needed to add a delay to the game restarting to allow the game over function to finish.
 
